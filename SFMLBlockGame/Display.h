@@ -1,6 +1,4 @@
 #pragma once
-#ifndef DISPLAY_H_INCLUDED
-#define DISPLAY_H_INCLUDED
 namespace sf
 {
 	class Window;
@@ -24,4 +22,3 @@ namespace Display
 
 
 }
-#endif // DISPLAY_H_INCLUDED

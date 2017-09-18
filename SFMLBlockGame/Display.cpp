@@ -1,29 +1,27 @@
-#include "Display.h"
-
+#include "../Headers/Display.h"
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include <GL/glew.h>
-#include <iostream>
 
 namespace Display
 {
 	std::unique_ptr<sf::RenderWindow> window; //pointer to main window
+	sf::ContextSettings windowSettings;
 
 	void Initialize() //init the render window
 	{
-		sf::ContextSettings settings;
-		settings.depthBits = 24;
-		settings.majorVersion = 4;
-		settings.minorVersion = 5; //OpenGl v4.5
-		settings.antialiasingLevel = 8;
+		windowSettings.depthBits = 24;
+		windowSettings.majorVersion = 4;
+		windowSettings.minorVersion = 5; //OpenGl v4.5
+		windowSettings.antialiasingLevel = 8;
+		
 	
 		window = std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT)
 													, "Meinkraft"
 													, sf::Style::Close | sf::Style::Resize
-													, settings);
+													, windowSettings);
 		glewInit();
 		glViewport(0, 0, WIDTH, HEIGHT);
-
 		glEnable(GL_DEPTH_TEST);
 
 		//Set Window parameters (Limit framerate, fullscreen, etc)
@@ -64,12 +62,12 @@ namespace Display
 		window->display();
 	}
 
-	bool WindowIsOpen() //Checks if windows is open
+	bool WindowIsOpen()
 	{
 		return window->isOpen();
 	}
 
-	const sf::Window& GetWindow() //returns a constant reference of the window
+	const sf::Window& GetWindow() //returns an unchangeable window
 	{
 		return *window;
 	}
